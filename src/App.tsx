@@ -64,7 +64,9 @@ const App:FC = () => {
     },[toggleThreeScdBtn])
 
     useEffect(() => {
-        dispatch(setFavoriteJokesFromLocalStorage(JSON.parse(localStorage.favoriteJokes)))
+        if(localStorage.hasOwnProperty('favoriteJokes')) {
+            dispatch(setFavoriteJokesFromLocalStorage(JSON.parse(localStorage.favoriteJokes)))
+        }
     }, [])
 
     const currentQuote = useSelector((state:initialStateTypes) => state.currentJoke)

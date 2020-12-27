@@ -32,22 +32,29 @@ export const Button = styled.button`
     border: none;
     border-radius: 5px;
     color: white;
-    width: 100%;
     margin: auto;
     cursor: pointer;
     margin: 2px 10px 2px 10px;
+    
+     
+    @media (max-width: 500px) {
+        width: 100%;
+    }   
+    
+    
 `;
 
 const WrapForBtn = styled.div`
     display: flex;
     
-    @media (max-width: 600px) {
+    @media (max-width: 500px) {
     flex-direction: column;
     }   
 `;
 
 
 const App:FC = () => {
+    const dispatch = useDispatch()
 
     const [toggleThreeScdBtn, setToggleThreeScdBtn] = useState<boolean>(false)
 
@@ -70,7 +77,7 @@ const App:FC = () => {
     }, [])
 
     const currentQuote = useSelector((state:initialStateTypes) => state.currentJoke)
-    const dispatch = useDispatch()
+
 
 
     const onClickToThreeSeconds = () => {
@@ -88,7 +95,10 @@ const App:FC = () => {
 
               <Title>Шутки Чака </Title>
               <WrapForBtn>
-                  <Button onClick={() => dispatch(getData())}>Получить рандом шутку</Button>
+                  <Link to={'/'}>
+                      <Button onClick={() => dispatch(getData())}>Получить рандом шутку</Button>
+                  </Link>
+
                   {
                       toggleThreeScdBtn ?  <Button onClick={onClickToThreeSeconds}>Хватит шутить!</Button>
                           :  <Button onClick={onClickToThreeSeconds}>Шутка каждые 3с.</Button>
